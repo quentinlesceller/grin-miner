@@ -23,10 +23,9 @@ use std::thread;
 
 use bufstream::BufStream;
 use native_tls::TlsConnector;
-use native_tls::TlsStream;
 use serde_json;
 use time;
-use url::{ParseError, Url};
+use url::Url;
 
 use stats;
 use types;
@@ -83,14 +82,15 @@ where
 		let ssl = true;
 		match TcpStream::connect(self.server_url.clone()) {
 			Ok(conn) => {
-				let _ = stream.get_mut().set_nonblocking(true);
 				if ssl {
 					let connector = TlsConnector::new().unwrap();
 					let url = Url::parse(&self.server_url).unwrap();
 					let host = url.host_str().unwrap();;
 					let mut stream = connector.connect(host, conn).unwrap();
+					let _ = stream.get_mut().set_nonblocking(true);
 					self.stream = Some(BufStream::new(stream));
 				} else {
+					let _ = conn.set_nonblocking(true);
 					self.stream = Some(BufStream::new(conn));
 				}
 
