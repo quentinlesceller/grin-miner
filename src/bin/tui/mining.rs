@@ -103,7 +103,7 @@ pub struct TUIMiningView;
 
 impl TUIStatusListener for TUIMiningView {
 	/// Create the mining view
-	fn create() -> Box<View> {
+	fn create() -> Box<dyn View> {
 		let table_view = TableView::<SolverStats, MiningDeviceColumn>::new()
 			.column(MiningDeviceColumn::Plugin, "Plugin", |c| {
 				c.width_percent(20)

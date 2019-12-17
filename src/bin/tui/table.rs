@@ -150,11 +150,11 @@ pub struct TableView<T: TableViewItem<H>, H: Eq + Hash + Copy + Clone + 'static>
 	items: Vec<T>,
 	rows_to_items: Vec<usize>,
 
-	on_sort: Option<Rc<Fn(&mut Cursive, H, Ordering)>>,
+	on_sort: Option<Rc<dyn Fn(&mut Cursive, H, Ordering)>>,
 	// TODO Pass drawing offsets into the handlers so a popup menu
 	// can be created easily?
-	on_submit: Option<Rc<Fn(&mut Cursive, usize, usize)>>,
-	on_select: Option<Rc<Fn(&mut Cursive, usize, usize)>>,
+	on_submit: Option<Rc<dyn Fn(&mut Cursive, usize, usize)>>,
+	on_select: Option<Rc<dyn Fn(&mut Cursive, usize, usize)>>,
 }
 
 impl<T: TableViewItem<H>, H: Eq + Hash + Copy + Clone + 'static> TableView<T, H> {

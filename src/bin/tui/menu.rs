@@ -25,7 +25,7 @@ use cursive::direction::Orientation;
 use tui::constants::*;
 
 /// Create menu
-pub fn create() -> Box<View> {
+pub fn create() -> Box<dyn View> {
 	let mut main_menu = SelectView::new().h_align(HAlign::Left).with_id(MAIN_MENU);
 	main_menu.get_mut().add_item("Mining", VIEW_MINING);
 	main_menu.get_mut().add_item("Version Info", VIEW_VERSION);

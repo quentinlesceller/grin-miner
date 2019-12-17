@@ -33,7 +33,7 @@ pub struct TUIVersionView;
 
 impl TUIStatusListener for TUIVersionView {
 	/// Create basic status view
-	fn create() -> Box<View> {
+	fn create() -> Box<dyn View> {
 		let (basic_info, detailed_info, _) = info_strings();
 		let basic_status_view = BoxView::with_full_screen(
 			LinearLayout::new(Orientation::Vertical)
